@@ -1,0 +1,19 @@
+{
+  "name": "wordguessr-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lclarke98/wordguessr-backend.git"
+  },
+  "author": "lclarke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lclarke98/wordguessr-backend/issues"
+  },
+  "homepage": "https://github.com/lclarke98/wordguessr-backend#readme"
+}
