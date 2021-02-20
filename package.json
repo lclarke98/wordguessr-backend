@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/lclarke98/wordguessr-backend/issues"
   },
-  "homepage": "https://github.com/lclarke98/wordguessr-backend#readme"
+  "homepage": "https://github.com/lclarke98/wordguessr-backend#readme",
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "mysql2": "^2.2.5"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }

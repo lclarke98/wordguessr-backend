@@ -7,7 +7,7 @@ app.use(cors({origin: 'http://localhost:1024'}));
 
 app.use('/game', require('./game'));
 
-
+app.use('/user', require('./user'));
 
 //App runs on port 80
 const port = process.env.PORT || 8080;
