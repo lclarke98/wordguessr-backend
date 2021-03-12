@@ -18,9 +18,12 @@
   "homepage": "https://github.com/lclarke98/wordguessr-backend#readme",
   "devDependencies": {
     "cors": "^2.8.5",
+    "csv-parse": "^4.15.3",
+    "csv-parser": "^3.0.0",
     "mysql2": "^2.2.5"
   },
   "dependencies": {
+    "csv": "^5.3.2",
     "express": "^4.17.1"
   }
 }
