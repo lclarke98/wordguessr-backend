@@ -1,7 +1,7 @@
 //csv reader
 const reader = require("csv-parse")
 // needs to get the chosen game to find a word
-
+const db = require('./game-db')
 const csv = require('csv-parser');
 const fs = require('fs');
 
@@ -10,8 +10,9 @@ const fs = require('fs');
 
 async function getWord(gameMode){
     if (gameMode === 'normal'){
-       let [words] = test()
-        console.log(words)
+       let word = await db.getWord(Math.floor(Math.random() * Math.floor(500)))
+        return word
+        //console.log(word)
    }
     return ''
 }
@@ -28,7 +29,6 @@ function test(){
             //   { NAME: 'Bugs Bunny', AGE: '22' }
             // ]
         });
-    console.log(list)
     return list
 }
 

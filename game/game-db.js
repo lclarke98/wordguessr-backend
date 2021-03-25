@@ -5,7 +5,7 @@ const connection = mysql.createConnection(config.mysql)
 
 async function createGame(userSub,gameMode, word)  {
     let con = await connection
-    let sql = "INSERT INTO game (user_sub, game_mode,word) values (?,?,?)"
+    let sql = "INSERT INTO game (user_sub, game_mode,word, guesses) values (?,?,?, '[]')"
     const insert = await con.query(sql, [userSub, gameMode, word]);
     return insert[0].insertId
 }
@@ -17,15 +17,16 @@ async function getWord(index)  {
 }
 
 async function getGame(gameID){
-    console.log(gameID)
     let con = await connection
     let [game] = await con.query("SELECT * FROM game WHERE game_id = ?",[gameID])
     return game
 }
 
 async function addGuess(gameID, guess){
-    let sql = "UPDATE game SET guess = ? WHERE game_id = ?"
-    const insert = await con.query(sql, [gameID, guess]);
+    let con = await connection
+    let sql = "UPDATE game SET guesses = ? WHERE game_id = ?"
+    await con.query(sql, [JSON.stringify(guess), gameID]);
+    return true
 }
 
 module.exports = {
