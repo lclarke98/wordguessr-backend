@@ -32,8 +32,7 @@ game.get('/game', async (req, res) => {
 
 game.post('/guessLetter', async (req, res) => {
     try {
-        let game = await gc.makeGuess(req.body.gameID, req.body.guess)
-        console.log(game)
+        let game = await gc.makeGuess(req.body.gameID, req.body.guess, req.body.count)
         res.send(game)
     }catch (e) {
         console.error(e);

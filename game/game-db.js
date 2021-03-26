@@ -3,10 +3,10 @@ const config = require('../db-config')
 const connection = mysql.createConnection(config.mysql)
 
 
-async function createGame(userSub,gameMode, word)  {
+async function createGame(userSub,gameMode, word, count)  {
     let con = await connection
-    let sql = "INSERT INTO game (user_sub, game_mode,word, guesses) values (?,?,?, '[]')"
-    const insert = await con.query(sql, [userSub, gameMode, word]);
+    let sql = "INSERT INTO game (user_sub, game_mode,word, guess_count, guesses) values (?,?,?,?, '[]')"
+    const insert = await con.query(sql, [userSub, gameMode, word, count]);
     return insert[0].insertId
 }
 
@@ -22,10 +22,10 @@ async function getGame(gameID){
     return game
 }
 
-async function addGuess(gameID, guess){
+async function addGuess(gameID, guess, count){
     let con = await connection
-    let sql = "UPDATE game SET guesses = ? WHERE game_id = ?"
-    await con.query(sql, [JSON.stringify(guess), gameID]);
+    let sql = "UPDATE game SET guesses = ?, guess_count=? WHERE game_id = ?"
+    await con.query(sql, [JSON.stringify(guess), count, gameID]);
     return true
 }
 
