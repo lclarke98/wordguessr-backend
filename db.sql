@@ -10,5 +10,6 @@ CREATE TABLE if not exists wordguessr.game(
   user_sub VARCHAR(88) NOT NULL,
   game_mode VARCHAR(88) NOT NULL,
   word VARCHAR(88) NOT NULL,
+  guess_count int NOT NULL,
   guesses longtext null
 );
