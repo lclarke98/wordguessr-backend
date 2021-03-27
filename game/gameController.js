@@ -8,13 +8,16 @@ const ws = require('./wordSelector')
  * @returns {Promise<{gameID: number, userSub: *}>}
  */
 async function createGame(userSub, gameMode){
-    //let word = await ws.getWord(gameMode)
     let word = await ws.getWord(gameMode)
-    let count = await calculateGuessCount(gameMode, word[0].word)
-    let gameID = await db.createGame(userSub,gameMode, word[0].word, count)
+    let count = await calculateGuessCount(gameMode, word)
+    let gameID = await db.createGame(userSub,gameMode, word, count)
     return {'userSub': userSub, 'gameID': gameID}
 }
 
+/**
+ * @param obj
+ * @returns {Promise<any>}
+ */
 async  function toJSON(obj){
     let arr = obj[0].guesses.replace("'", "");
     return JSON.parse(arr)
@@ -22,10 +25,12 @@ async  function toJSON(obj){
 
 /**
  * @param gameID
+ * @param userID
  * @returns {Promise<*>}
  */
-async function getGame(gameID){
-    let game = await db.getGame(gameID)
+async function getGame(gameID, userID){
+    let game = await db.getGame(gameID, userID)
+    console.log(game)
     let arr = await toJSON(game)
     game.push(arr)
     let complete = await isGameComplete(arr, game[0].word)
@@ -41,11 +46,12 @@ async function getGame(gameID){
  * @param gameID
  * @param guess
  * @param guessCount
+ * @param userID
  * @returns {Promise<void>}
  */
-async function makeGuess(gameID, guess, guessCount){
+async function makeGuess(gameID, guess, guessCount, userID){
 // {'guess':"", 'correct': true/false}
-    let game = await getGame(gameID)
+    let game = await getGame(gameID,userID)
     let arr = game[0].guesses.replace("'", "");
     let newArr = JSON.parse(arr)
 
@@ -61,10 +67,14 @@ async function makeGuess(gameID, guess, guessCount){
         newArr.push({'guess':guess, 'correct': false})
     }
     await db.addGuess(gameID, newArr, guessCount)
-
-    return getGame(gameID)
+    return getGame(gameID, userID)
 }
 
+/**
+ * @param list
+ * @param word
+ * @returns {Promise<boolean>}
+ */
 async function isGameComplete(list, word){
     let count = 0
     let wordCount = word.length
@@ -76,10 +86,19 @@ async function isGameComplete(list, word){
     return count === wordCount;
 }
 
+/**
+ * @param word
+ * @param gameMode
+ * @returns {Promise<number>}
+ */
 async function calculateGuessCount(word, gameMode){
     let wordLength = word.length
 
+
+
     let guessCount = 0
+
+    //get word length then do something
 
     switch (gameMode === 'normal'){
         case wordLength <=5:
@@ -106,6 +125,7 @@ async function guessWord(gameID, word, guessedWord){
     return word === guessedWord;
 }
 
+//userID: this.userInfo.sub,
 
 module.exports = {
     createGame,

@@ -22,7 +22,7 @@ game.post('/createGame', async (req, res) => {
 
 game.get('/game', async (req, res) => {
     try {
-        let game = await gc.getGame(req.query.gameID)
+        let game = await gc.getGame(req.query.gameID, req.query.userID)
         res.send(game)
     }catch (e) {
         console.error(e);
@@ -32,7 +32,7 @@ game.get('/game', async (req, res) => {
 
 game.post('/guessLetter', async (req, res) => {
     try {
-        let game = await gc.makeGuess(req.body.gameID, req.body.guess, req.body.count)
+        let game = await gc.makeGuess(req.body.gameID, req.body.guess, req.body.count, req.body.userID)
         res.send(game)
     }catch (e) {
         console.error(e);
