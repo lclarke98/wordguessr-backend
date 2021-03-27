@@ -2,48 +2,25 @@
 const reader = require("csv-parse")
 // needs to get the chosen game to find a word
 const db = require('./game-db')
-const csv = require('csv-parser');
+//const csv = require('csv-parser');
 const fs = require('fs');
-
+const csv = require('csvtojson');
 
 
 
 async function getWord(gameMode){
     if (gameMode === 'normal'){
-       let word = await db.getWord(Math.floor(Math.random() * Math.floor(500)))
-        return word
-        //console.log(word)
+       let word = await getWordList('/Users/leoclarke/Documents/github/wordguessr-backend/game/words.csv')
+        return word[Math.floor(Math.random() * Math.floor(500))].word
    }
     return ''
 }
 
-function test(){
-    let list = []
-    fs.createReadStream('/Users/leoclarke/Documents/github/wordguessr-backend/game/words.csv')
-        .pipe(csv())
-        .on('data', (data) => list.push(data))
-        .on('end', () => {
-            //console.log(list);
-            // [
-            //   { NAME: 'Daffy Duck', AGE: '24' },
-            //   { NAME: 'Bugs Bunny', AGE: '22' }
-            // ]
-        });
-    return list
-}
+async function getWordList(csvFilePath){
+    const csv = require('csvtojson');
+    const jsonObj = await csv().fromFile(csvFilePath)
+    return jsonObj
 
-async function getWordList(path){
-    let list = []
-    fs.createReadStream('/Users/leoclarke/Documents/github/wordguessr-backend/game/words.csv')
-        .pipe(csv())
-        .on('data', (row) => {
-            list.push(row.word)
-        })
-        .on('end', () => {
-            console.log('CSV file successfully processed');
-        });
-
-    return list
 }
 
 

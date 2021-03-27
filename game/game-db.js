@@ -16,9 +16,9 @@ async function getWord(index)  {
     return word
 }
 
-async function getGame(gameID){
+async function getGame(gameID, userID){
     let con = await connection
-    let [game] = await con.query("SELECT * FROM game WHERE game_id = ?",[gameID])
+    let [game] = await con.query("SELECT * FROM game WHERE game_id = ? AND user_sub = ?",[gameID, userID])
     return game
 }
 
