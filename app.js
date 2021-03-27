@@ -5,6 +5,7 @@ const privateKey  = fs.readFileSync('key.pem', 'utf8');
 const certificate = fs.readFileSync('cert.pem', 'utf8');
 const credentials = {key: privateKey, cert: certificate};
 const express = require('express');
+require('dotenv').config()
 const app = express();
 
 const cors = require('cors');

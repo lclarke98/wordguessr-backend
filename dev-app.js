@@ -1,6 +1,8 @@
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
+require('dotenv').config()
+
 //const privateKey  = fs.readFileSync('key.pem', 'utf8');
 //const certificate = fs.readFileSync('cert.pem', 'utf8');
 //const credentials = {key: privateKey, cert: certificate};
@@ -19,7 +21,7 @@ app.use(cors({origin: 'http://localhost:1024'}));
 //    next();
 //});
 
-
+console.log(process.env.PORT)
 
 app.use('/game', require('./game'));
 app.use('/user', require('./user'));
