@@ -1,6 +1,5 @@
 const mysql = require('mysql2/promise')
 const config = require('../db-config')
-console.log(config.mysql)
 const connection = mysql.createConnection(config.mysql)
 
 
@@ -20,7 +19,6 @@ async function getWord(index)  {
 async function getGame(gameID, userID){
     let con = await connection
     let [game] = await con.query("SELECT * FROM game WHERE game_id = ? AND user_sub = ?",[gameID, userID])
-    console.log('this is the game: ', game)
     return game
 }
 
