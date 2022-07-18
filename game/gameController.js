@@ -9,7 +9,7 @@ const ws = require('./wordSelector')
  */
 async function createGame(userSub, gameMode){
     let word = await ws.getWord(gameMode)
-    let count = await calculateGuessCount(gameMode, word)
+    let count = await calculateGuessCount(word, gameMode)
     let gameID = await db.createGame(userSub,gameMode, word, count)
     return {'userSub': userSub, 'gameID': gameID}
 }
@@ -92,22 +92,22 @@ async function isGameComplete(list, word){
  * @returns {Promise<number>}
  */
 async function calculateGuessCount(word, gameMode){
+    console.log('the word: ', word)
+    console.log('the mode: ', gameMode)
     let wordLength = word.length
-
-
-
+    console.log("the word length: ", wordLength)
     let guessCount = 0
 
     //get word length then do something
 
     switch (gameMode === 'normal'){
-        case wordLength <=5:
+        case wordLength <= 4:
             guessCount = 8
             break
-        case wordLength <= 10:
+        case wordLength <= 9:
             guessCount = 12
             break
-        case wordLength > 10:
+        case wordLength >=10:
             guessCount = 16
             break
     }

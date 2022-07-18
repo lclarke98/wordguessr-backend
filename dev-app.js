@@ -12,7 +12,7 @@ const app = express();
 const cors = require('cors');
 
 // use it before all route definitions
-app.use(cors({origin: 'http://localhost:1024'}));
+app.use(cors({origin: 'http://localhost:8080'}));
 
 //app.use(function(req, res, next) {
 //    console.log("TEST")
@@ -30,5 +30,5 @@ app.use('/user', require('./user'));
 const httpServer = http.createServer(app);
 //const httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(8080);
+httpServer.listen(1024);
 //httpsServer.listen(443);
