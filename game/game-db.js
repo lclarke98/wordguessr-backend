@@ -22,6 +22,12 @@ async function getGame(gameID, userID){
     return game
 }
 
+async function getAllGames(userID){
+    let con = await connection
+    let [games] = await con.query("SELECT * FROM game WHERE user_sub = ?", [userID])
+    return games
+}
+
 async function addGuess(gameID, guess, count){
     let con = await connection
     let sql = "UPDATE game SET guesses = ?, guess_count=? WHERE game_id = ?"
@@ -32,6 +38,7 @@ async function addGuess(gameID, guess, count){
 module.exports = {
     createGame,
     getWord,
+    getAllGames,
     getGame,
     addGuess,
 }
