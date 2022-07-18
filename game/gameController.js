@@ -92,13 +92,8 @@ async function isGameComplete(list, word){
  * @returns {Promise<number>}
  */
 async function calculateGuessCount(word, gameMode){
-    console.log('the word: ', word)
-    console.log('the mode: ', gameMode)
     let wordLength = word.length
-    console.log("the word length: ", wordLength)
     let guessCount = 0
-
-    //get word length then do something
 
     switch (gameMode === 'normal'){
         case wordLength <= 4:
@@ -133,5 +128,6 @@ module.exports = {
     makeGuess,
     guessWord,
     isGameComplete,
+    toJSON,
     calculateGuessCount,
 }
