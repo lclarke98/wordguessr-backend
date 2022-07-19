@@ -10,9 +10,9 @@ const csv = require('csvtojson');
 
 async function getWord(gameMode){
     if (gameMode === 'normal'){
-       let word = await getWordList(process.env.CSV_PATH + 'words.csv')
+        let word = await getWordList(process.env.CSV_PATH + 'words.csv')
         return word[Math.floor(Math.random() * Math.floor(500))].word
-   }
+    }
     return ''
 }
 

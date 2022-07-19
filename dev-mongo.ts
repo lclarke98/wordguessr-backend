@@ -1,5 +1,6 @@
 import express from 'express';
 import {connectToServer} from "./mongo-config";
+// @ts-ignore
 import http from "http";
 const cors = require('cors');
 

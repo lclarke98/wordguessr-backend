@@ -1,7 +1,7 @@
 const express = require('express')
 const game = express.Router();
 const bodyParser = require('body-parser')
-const gc = require('./gameController')
+import * as gc  from './gameController';
 const db = require("./game-db");
 module.exports = game
 
@@ -53,7 +53,7 @@ game.post('/guessLetter', async (req, res) => {
 
 game.post('/guessWord', async (req, res) => {
     try {
-        let game = await gc.guessWord(req.body.gameID, req.body.guess)
+        let game = await gc.guessWord(req.body.gameID, req.body.word ,req.body.guess)
         res.send(game)
     }catch (e) {
         console.error(e);

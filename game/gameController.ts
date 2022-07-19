@@ -122,7 +122,7 @@ async function guessWord(gameID, word, guessedWord){
 
 //userID: this.userInfo.sub,
 
-module.exports = {
+export {
     createGame,
     getGame,
     makeGuess,
