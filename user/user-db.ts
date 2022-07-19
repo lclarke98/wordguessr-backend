@@ -3,7 +3,7 @@ const config = require('../db-config')
 const connection = mysql.createConnection(config.mysql)
 
 // gets data for room
-async function getUser(userSub)  {
+async function getUser(userSub:string)  {
     let con = await connection
     let [user] = await con.query("SELECT user_id from user where user_sub = ? ",[userSub])
     if (user.length === 1){

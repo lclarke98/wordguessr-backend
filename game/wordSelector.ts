@@ -1,14 +1,14 @@
 //csv reader
 const reader = require("csv-parse")
 // needs to get the chosen game to find a word
-const db = require('./game-db')
+import * as db from './game-db'
 //const csv = require('csv-parser');
 const fs = require('fs');
 const csv = require('csvtojson');
 
 
 
-async function getWord(gameMode){
+async function getWord(gameMode:string){
     if (gameMode === 'normal'){
         let word = await getWordList(process.env.CSV_PATH + 'words.csv')
         return word[Math.floor(Math.random() * Math.floor(500))].word
@@ -16,7 +16,7 @@ async function getWord(gameMode){
     return ''
 }
 
-async function getWordList(csvFilePath){
+async function getWordList(csvFilePath:string){
     const csv = require('csvtojson');
     const jsonObj = await csv().fromFile(csvFilePath)
     return jsonObj

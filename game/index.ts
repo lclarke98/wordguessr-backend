@@ -11,7 +11,7 @@ game.use(bodyParser.urlencoded({ extended: true }));
 //pass all calls to game controller
 
 
-game.post('/createGame', async (req, res) => {
+game.post('/createGame', async (req:any, res:any) => {
     try {
         let game = await gc.createGame(req.body.sub, req.body.mode)
         res.send(game)
@@ -21,7 +21,7 @@ game.post('/createGame', async (req, res) => {
     }
 });
 
-game.get('/game', async (req, res) => {
+game.get('/game', async (req:any, res:any) => {
     try {
         let game = await gc.getGame(req.query.gameID, req.query.userID)
         res.send(game)
@@ -31,7 +31,7 @@ game.get('/game', async (req, res) => {
     }
 });
 
-game.get('/allGames', async (req, res) => {
+game.get('/allGames', async (req:any, res:any) => {
     try {
         let game = await db.getAllGames(req.query.userID)
         res.send(game)
@@ -41,7 +41,7 @@ game.get('/allGames', async (req, res) => {
     }
 });
 
-game.post('/guessLetter', async (req, res) => {
+game.post('/guessLetter', async (req:any, res:any) => {
     try {
         let game = await gc.makeGuess(req.body.gameID, req.body.guess, req.body.count, req.body.userID)
         res.send(game)
@@ -51,7 +51,7 @@ game.post('/guessLetter', async (req, res) => {
     }
 });
 
-game.post('/guessWord', async (req, res) => {
+game.post('/guessWord', async (req:any, res:any) => {
     try {
         let game = await gc.guessWord(req.body.gameID, req.body.word ,req.body.guess)
         res.send(game)

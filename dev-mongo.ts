@@ -7,7 +7,7 @@ const cors = require('cors');
 const port = 8080;
 
 
-connectToServer( function( err, client ) {
+connectToServer( function( err: any, client:any) {
     if (err) console.log('an error: ',err);
     const app = express();
 
