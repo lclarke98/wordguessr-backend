@@ -1,10 +1,14 @@
-import express from 'express';
+// @ts-ignore
+import express from 'express'
+import cors from "cors";
+import user from './user'
+import game from './game'
 import {connectToServer} from "./mongo-config";
 // @ts-ignore
 import http from "http";
-const cors = require('cors');
 
-const port = 8080;
+
+const port = 1024;
 
 
 connectToServer( function( err: any, client:any) {
@@ -15,11 +19,11 @@ connectToServer( function( err: any, client:any) {
 
     console.log(process.env.PORT)
 
-    app.use('/game', require('./game'));
-    app.use('/user', require('./user'));
+    app.use('/game', game );
+    app.use('/user', user);
 
     const httpServer = http.createServer(app);
 
-    httpServer.listen(1024);
+    httpServer.listen(port);
 
 } );

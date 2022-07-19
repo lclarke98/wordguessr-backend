@@ -3,7 +3,6 @@ const game = express.Router();
 const bodyParser = require('body-parser')
 import * as gc  from './gameController';
 const db = require("./game-db");
-module.exports = game
 
 game.use(bodyParser.json());
 game.use(bodyParser.urlencoded({ extended: true }));
@@ -60,3 +59,5 @@ game.post('/guessWord', async (req:any, res:any) => {
         res.sendStatus(500);
     }
 });
+
+export default game

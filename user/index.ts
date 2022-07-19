@@ -2,7 +2,7 @@ const express = require('express');
 const user = express.Router();
 const bodyParser = require('body-parser')
 const db = require('./user-db')
-module.exports = user
+
 
 user.use(bodyParser.json());
 user.use(bodyParser.urlencoded({ extended: true }));
@@ -20,3 +20,4 @@ user.post('/user', async (req:any, res:any) => {
 });
 
 
+export default user
