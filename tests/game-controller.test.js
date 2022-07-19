@@ -32,6 +32,7 @@ test('This game should be complete',  async() => {
 
 test('Get all games for a user', async() =>{
     return db.getAllGames('07798db5-6d7e-4304-b10c-5e0d6ee9755b').then(data =>{
+        console.log(data.length)
         expect(data.length).toBeGreaterThan(20)
     })
 })

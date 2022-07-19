@@ -2,6 +2,7 @@ const express = require('express')
 const game = express.Router();
 const bodyParser = require('body-parser')
 const gc = require('./gameController')
+const db = require("./game-db");
 module.exports = game
 
 game.use(bodyParser.json());
@@ -23,6 +24,16 @@ game.post('/createGame', async (req, res) => {
 game.get('/game', async (req, res) => {
     try {
         let game = await gc.getGame(req.query.gameID, req.query.userID)
+        res.send(game)
+    }catch (e) {
+        console.error(e);
+        res.sendStatus(500);
+    }
+});
+
+game.get('/allGames', async (req, res) => {
+    try {
+        let game = await db.getAllGames(req.query.userID)
         res.send(game)
     }catch (e) {
         console.error(e);
