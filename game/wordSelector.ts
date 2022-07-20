@@ -10,7 +10,8 @@ const csv = require('csvtojson');
 
 async function getWord(gameMode:string){
     if (gameMode === 'normal'){
-        let word = await getWordList(process.env.CSV_PATH + 'words.csv')
+        console.log('path: ', process.env.CSV_PATH + 'words.csv')
+        let word = await getWordList('/Users/leo/Documents/git/wordguessr-backend/game/' + 'words.csv')
         return word[Math.floor(Math.random() * Math.floor(500))].word
     }
     return ''

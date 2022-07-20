@@ -19,7 +19,10 @@ async function createGame(userSub:string, gameMode:string){
  * @returns {Promise<any>}
  */
 async  function toJSON(obj:any){
+
     let arr = obj[0].guesses.replace("'", "");
+
+    console.log(obj)
     return JSON.parse(arr)
 }
 
@@ -31,8 +34,9 @@ async  function toJSON(obj:any){
 async function getGame(gameID:number, userID:string){
     let game = await db.getGame(gameID, userID)
     console.log(game)
-    let arr = await toJSON(game)
-    game.push(arr)
+    //let arr = await toJSON(game)
+    let arr = game[0]
+    game.push(arr.guesses)
     let complete = await isGameComplete(arr, game[0].word)
     if (complete === true){
         game.push({'complete': true})
@@ -52,8 +56,9 @@ async function getGame(gameID:number, userID:string){
 async function makeGuess(gameID:number, guess:string, guessCount:number, userID:string){
 // {'guess':"", 'correct': true/false}
     let game = await getGame(gameID,userID)
-    let arr = game[0].guesses.replace("'", "");
-    let newArr = JSON.parse(arr)
+    //let arr = game[0].guesses.replace("'", "");
+    //let newArr = JSON.parse(arr)
+    let newArr = game[0].guesses
 
     let strToCheck = RegExp(guess, 'g')
     let matchesReg = game[0].word.matchAll(strToCheck)

@@ -7,7 +7,7 @@ import {getDb} from "../mongo-config";
 async function getUser(userSub:string) {
     try {
         let db = await getDb();
-
+        console.log("the db: ", db)
         let user = await db.collection("users")
             .find({ user_id: userSub })
             .toArray();
@@ -29,7 +29,7 @@ async function getUser(userSub:string) {
         }
     } catch (e) {
         console.error(e);
-        return "error";
+        return e;
     }
 }
 
