@@ -30,7 +30,7 @@ async function createGame(userSub:string,gameMode:string, word:string, count:num
     }
 }
 
-async function getGame(gameID:number, userID:string){
+async function getGame(gameID:string, userID:string){
     try {
         let db = await getDb();
         console.log('the passed game id: ', gameID)
@@ -60,7 +60,7 @@ async function getAllGames(userID:number){
     }
 }
 
-async function addGuess(gameID:number, guess:string, count:number){
+async function addGuess(gameID:string, guess:string, count:number){
     try {
         let db = await getDb()
         console.log(gameID, guess)
@@ -72,7 +72,22 @@ async function addGuess(gameID:number, guess:string, count:number){
             }
         })
     } catch (e) {
+        console.log(e)
+    }
+}
 
+async function setComplete(gameID:string){
+    try {
+        let db = await getDb()
+        await db.collection('games').updateOne({
+            _id: new ObjectId(gameID)
+        }, {
+            $set: {
+                complete: true
+            }
+        })
+    } catch (e) {
+        console.log(e)
     }
 }
 
@@ -83,4 +98,5 @@ export {
     getAllGames,
     getGame,
     addGuess,
+    setComplete
 }
