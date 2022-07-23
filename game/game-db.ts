@@ -8,7 +8,6 @@ import {ObjectId} from "mongodb";
 async function createGame(userSub:string,gameMode:string, word:string, count:number)  {
     try {
         let db = await getDb();
-        let id
         let game = {
             'user_id': userSub,
             'game_mode': gameMode,
@@ -33,7 +32,6 @@ async function createGame(userSub:string,gameMode:string, word:string, count:num
 async function getGame(gameID:string, userID:string){
     try {
         let db = await getDb();
-        console.log('the passed game id: ', gameID)
         let game = await db.collection("games")
             .find({"_id" : new ObjectId(gameID)})
             .toArray()
@@ -90,8 +88,6 @@ async function setComplete(gameID:string){
         console.log(e)
     }
 }
-
-
 
 export {
     createGame,

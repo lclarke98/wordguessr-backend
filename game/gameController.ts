@@ -15,14 +15,12 @@ async function createGame(userSub:string, gameMode:string){
 }
 
 /**
+ * @deprecated
  * @param obj
  * @returns {Promise<any>}
  */
 async  function toJSON(obj:any){
-
     let arr = obj[0].guesses.replace("'", "");
-
-    console.log(obj)
     return JSON.parse(arr)
 }
 
@@ -33,7 +31,6 @@ async  function toJSON(obj:any){
  */
 async function getGame(gameID:string, userID:string){
     let game = await db.getGame(gameID, userID)
-    console.log(game)
     //let arr = await toJSON(game)
     let arr = game[0]
     game.push(arr.guesses)
@@ -65,8 +62,6 @@ async function makeGuess(gameID:string, guess:string, guessCount:number, userID:
     let matchesReg = game[0].word.matchAll(strToCheck)
     let count = Array.from(matchesReg).length
 
-    console.log('game: ', game[0].word)
-
     if (game[0].word.includes(guess)){
         for (let i = 0; i < count; i++ ){
             newArr.push({'guess':guess, 'correct': true})
@@ -86,10 +81,7 @@ async function makeGuess(gameID:string, guess:string, guessCount:number, userID:
 async function isGameComplete(list:any, word:string){
     let count = 0
     let wordCount = word.length
-    console.log('-------')
-    console.log(wordCount)
-    console.log(list)
-    console.log('-------')
+
     for (let i = 0; i < list.length; i++){
         if (list[i].correct === true){
             count += 1
@@ -132,7 +124,6 @@ async function guessWord(gameID:number, word:string, guessedWord:string){
     return word === guessedWord;
 }
 
-//userID: this.userInfo.sub,
 
 export {
     createGame,
